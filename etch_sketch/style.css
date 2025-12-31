@@ -1,0 +1,28 @@
+*, *::before, *::after {
+    font-family: Roboto, Arial;
+    box-sizing:border-box;
+}
+
+#title {
+    margin-bottom: 0;
+}
+
+button {
+    margin: 40px 10px;
+    font-size: 20px;
+}
+
+#container {
+    width: 50%;
+    min-width: 300px;
+    display: flex;
+    border: 2px solid hsl(300, 100%, 35%);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.grid-box {
+    aspect-ratio: 1 / 1;
+}
