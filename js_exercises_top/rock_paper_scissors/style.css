@@ -1,0 +1,40 @@
+*, *::before, *::after {
+    font-family: Roboto, Arial;
+    box-sizing: border-box;
+}
+#buttons {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    font-size: 24px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: gray;
+}
+
+#results {
+    width: 60%;
+    margin: 24px auto;
+    border: hsl(300, 100%, 35%) 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: hsl(300, 100%, 95%);
+}
+
+#results span{
+    font-weight: bold;
+}
+
+#results p{
+    font-size: 20px;
+}
+
+#next {
+    display:block;
+    margin: 0 auto;
+}

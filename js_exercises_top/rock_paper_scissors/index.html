@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./rps.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 <body>
-    <script src="./rps.js"></script>
+    <h1>Rock Paper Scissors (V2)</h1>
+    <div id="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div id="results">
+        <p id="winner">Winner: <span data-winner>None</span></p>
+        <p id="user-score">User score: <span data-user-score>0</span></p>
+        <p id="computer-score">Computer score: <span data-computer-score>0</span></p>
+    </div>
+    <button id="next" disabled>Next</button>
 </body>
 </html>
