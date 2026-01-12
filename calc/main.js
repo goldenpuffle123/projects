@@ -13,63 +13,87 @@ let num1 = 0;
 let num2 = 0;
 let result = 0;
 let operator = 0;
-let opDone = false;
+let state = 0;
+// 0: FIRST NUMBER
+// 1: operator
+// 2: SECOND NUMBER
+// 3: operator
 
 function handleButton(btn) {
     let btnClass = btn.classList;
     let btnText = btn.textContent;
-    if(btnClass.contains("digit")) {
-        let digit = parseInt(btnText);
-        if(opDone == false) {
-            num1 = num1*10 + digit;
-        }
-        else {
-            num2 = num2*10 + digit;
-        }
-        displayString += btnText;
+    if(btn.id == "button-clear"){
+        num1 = 0;
+        num2 = 0;
+        displayString = "";
+        operator = 0;
+        state = 0;
     }
-    else if(btnClass.contains("operation")) {
-        if(opDone == false){
-            operator = handleOperation(btn.id);
-            if(operator > 0){
-                displayString += ` ${btnText} `;
-                opDone = true;
+    switch(state) {
+        case 0:
+            if(btnClass.contains("digit")) {
+                let digit = parseInt(btnText);
+                num1 = num1*10 + digit;
+                displayString += btnText; // Concat
+                state = 1;
             }
-            else{
-                reset();
+            break;
+        case 1:
+            if(btnClass.contains("digit")) { // Maintain state
+                let digit = parseInt(btnText);
+                num1 = num1*10 + digit;
+                displayString += btnText; // Concat
             }
-        }
-        else {
-            result = getResult(operator);
-            reset();
-            num1 = result;
-            if(!Number.isInteger(result)) {
-                displayString += (Math.round(num1*10**DISPLAY_ROUND)/(10**DISPLAY_ROUND));
+            else if(btnClass.contains("operator")) {
+                operator = getOperator(btn.id);
+                if(operator > 0) { // Not equals
+                    displayString += ` ${btnText} `;
+                    state = 2;
+                }
             }
-            else {
-                displayString += num1;
+            break;
+        case 2:
+            if(btnClass.contains("digit")) { // Maintain state
+                let digit = parseInt(btnText);
+                num2 = num2*10 + digit;
+                displayString += btnText; // Concat
+                state = 3;
             }
-            console.log(result);
-            operator = handleOperation(btn.id);
-            if(operator > 0){
-                displayString += ` ${btnText} `
+            break;
+        case 3:
+            if(btnClass.contains("digit")) { // Maintain state
+                let digit = parseInt(btnText);
+                num2 = num2*10 + digit;
+                displayString += btnText; // Concat
             }
-            else{
-                opDone = false;
+            else if(btnClass.contains("operator")) {
+                result = getResult(operator);
+                num1 = result;
+                num2 = 0;
+                displayString = "";
+                if(Number.isInteger(result)){
+                    displayString += num1;
+                }
+                else{
+                    displayString += Math.round(num1*10**DISPLAY_ROUND)/(10**DISPLAY_ROUND);
+                }
+                
+                operator = getOperator(btn.id);
+                if(operator > 0) { // Not the equal operator
+                    displayString += ` ${btnText} `;
+                    state = 2;
+                }
+                else {
+                    state = 1;
+                }
             }
-        }
+            break;            
     }
-    else {
-        if(btn.id == "button-clear"){
-            reset();
-            operator = 0;
-            opDone = false;
-        }
-    }
+    displayText.textContent = displayString;
     display(displayString);
 }
 
-function handleOperation(btnID) {
+function getOperator(btnID) {
     switch(btnID){
         case "button-equals":
             return 0;
@@ -84,8 +108,8 @@ function handleOperation(btnID) {
     }
 }
 
-function getResult(operation) {
-    switch(operation) {
+function getResult(operator) {
+    switch(operator) {
         case 1:
             return num1+num2;
         case 2:
@@ -95,13 +119,6 @@ function getResult(operation) {
         case 4:
             return num2!=0 ? num1/num2 : undefined
     }
-}
-
-function reset() {
-    num1 = 0;
-    num2 = 0;
-    displayString = "";
-    displayText.textContent = displayString;
 }
 
 function display(str) {
