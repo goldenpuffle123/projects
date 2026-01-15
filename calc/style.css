@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*, ::before, ::after {
+    font-family: Roboto, Arial;
+    box-sizing: border-box;
+}
+
+header small {
+    font-size: 0.4em;
+}
+
+#div-calculator {
+    width: 25%;
+}
+
+#display {
+    grid-column: span 4;
+    aspect-ratio: 3/1;
+    width: 100%;
+    background-color: rgb(26, 26, 26);
+    display: flex;
+    font-size: 40px;
+    align-items:center;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+
+#div-calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#div-calculator * {
+    color: white;
+}
+
+#div-calculator button {
+    border: 0.5px solid rgb(106, 106, 106);
+    background-color: rgb(131, 131, 131);
+    aspect-ratio: 1/1;
+    font-size: 20px;
+}
+
+#div-calculator button:hover {
+    filter: brightness(95%);
+}
+
+#div-calculator button:active {
+    filter: brightness(85%);
+}
+
+#div-calculator #button-0 {
+    grid-column: span 2;
+    aspect-ratio: auto;
+}
+
+#div-calculator button.digit {
+    background-color: rgb(174, 174, 174)
+}
+
+#div-calculator button.operator {
+    background-color: rgb(255, 165, 0)
+}
